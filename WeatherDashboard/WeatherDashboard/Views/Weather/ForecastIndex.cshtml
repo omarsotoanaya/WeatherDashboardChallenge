@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WeatherDashboard.Model.Weather>
+
+@{
+    ViewData["Title"] = "ForecastIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Weather</h2>
+
+
+@using (@Html.BeginForm("OnChange", "Weather"))
+{
+    var list = new List<SelectListItem>();
+    var selected = new SelectListItem();
+    list.Add(new SelectListItem() { Value = "0",Text="Cajeme"});
+    list.Add(new SelectListItem() { Value = "1", Text = "Hermosillo" });
+    list.Add(new SelectListItem() { Value = "2", Text = "Nogales" });
+    list.Add(new SelectListItem() { Value = "3", Text = "Navojoa" });
+
+
+    @Html.DropDownList("SortBy", list,  new { onchange = "form.submit()"});
+
+}
+<table class="table">
+    <tr>
+        <th>
+            <p>Date</p>
+        </th>
+        <th>
+            <p>Temperature</p>
+        </th>
+    </tr>
+
+    @foreach (var weather in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => weather.Valid_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => weather.Temp)
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+

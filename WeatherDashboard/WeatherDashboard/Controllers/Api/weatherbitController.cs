@@ -15,14 +15,13 @@ namespace WeatherDashboard.Controllers.Api
     public class WeatherbitController : Controller
     {
         [HttpGet]
-        public JSONData GetWeather(string city)
+        public JSONData GetJSONInfo(int cityId)
         {
             // Default value is Obregon.
-            if (string.IsNullOrEmpty(city))
-                city = WebApiConstant.Cities.Cajeme.ToString();
+            string cityName = GetCityById(cityId);
 
             // Build the Url
-            var url = string.Format("{0}city={1}&country{2}&key={3}", WebApiConstant.URL, city
+            var url = string.Format("{0}city={1}&country{2}&key={3}", WebApiConstant.URL, cityName
                , WebApiConstant.COUNTRY, WebApiConstant.KEY);
 
             using (WebClient webClient = new WebClient())
@@ -36,6 +35,36 @@ namespace WeatherDashboard.Controllers.Api
                 return weatherCollection;
             }
 
+        }
+
+        private string GetCityById(int cityId)
+        {
+            var city = "";
+            switch (cityId)
+            {
+                case 0:
+                    city = "Cajeme";
+                    break;
+
+                case 1:
+                    city = "Hermosillo";
+                    break;
+
+                case 2:
+                    city = "Navojoa";
+                    break;
+
+                case 3:
+                    city = "Nogales";
+                    break;
+
+                default:
+                    city = "Cajeme";
+                    break;
+
+            }
+
+            return city;
         }
 
     }

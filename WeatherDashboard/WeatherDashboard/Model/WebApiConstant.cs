@@ -11,13 +11,5 @@ namespace WeatherDashboard.Model
         public static string KEY = "054964adc87d4b44a3e2b8708a914697";
         public static string COUNTRY = "MX";
         
-        public enum Cities
-        {
-            Cajeme,
-            Hermosillo,
-            Navojoa,
-            Nogales
-        }
-
     }
 }
